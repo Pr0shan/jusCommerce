@@ -22,3 +22,17 @@ class RegistrationTestCase(APITestCase):
         self.assertEqual(User.objects.count(), 1)
         self.assertEqual(User.objects.get().email, 'testuser@example.com')
 
+    def test_seller_can_register(self):
+        url = reverse('register_user')
+        data = {
+            "email": 'testseller@example.com',
+            'full_name': 'Test Seller',
+            'password': 'strongpassword123',
+            'password2': 'strongpassword123',
+            'role': 'seller'
+        }
+        response = self.client.post(url, data, format="json")
+        print(response.data)
+        self.assertEqual(response.status_code, status.HTTP_201_CREATED)
+        self.assertEqual(User.objects.count(), 1)
+        self.assertEqual(User.objects.get().email, 'testseller@example.com')

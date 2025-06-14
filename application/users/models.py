@@ -7,6 +7,7 @@ from .managers import CustomUserManager
 class CustomUser(AbstractUser):
     ROLE_CHOICES = (
         ('customer', 'Customer'),
+        ('seller', 'Seller'),
         ('admin', 'Admin/Staff'),
     )
     email = models.EmailField(unique=True)
@@ -34,3 +35,9 @@ class AdminProfile(models.Model):
     user = models.OneToOneField(CustomUser, on_delete=models.CASCADE, related_name='admin_profile')
     department = models.CharField(max_length=100, blank=True)
     access_level = models.IntegerField(default=1)
+
+class SellerProfile(models.Model):
+    user = models.OneToOneField(CustomUser, on_delete=models.CASCADE, related_name='seller_profile')
+    address = models.TextField(blank=True)
+    shop_name = models.CharField(max_length=255, blank=True)
+
