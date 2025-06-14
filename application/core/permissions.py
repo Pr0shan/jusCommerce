@@ -7,8 +7,8 @@ class IsSeller(BasePermission):
     def has_permission(self, request, view):
         user = request.user
         is_authenticated = user.is_authenticated
-        if hasattr(user, 'profile'):
-            is_seller = user.profile.role=='seller'
+        if hasattr(user, 'role'):
+            is_seller = user.role=='seller'
         else:
             is_seller = False
         return is_authenticated and is_seller

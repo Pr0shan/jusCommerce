@@ -18,7 +18,10 @@ class CustomUser(AbstractUser):
     date_joined = models.DateTimeField(default=timezone.now)
 
     objects = CustomUserManager()
-
+    
+    # remove username
+    username = None 
+    
     USERNAME_FIELD = 'email'
     REQUIRED_FIELDS = ['full_name']
 
