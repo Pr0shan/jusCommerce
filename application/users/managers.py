@@ -8,7 +8,7 @@ class CustomUserManager(BaseUserManager):
         if not email:
             raise ValueError("Email must be provided")
         email = self.normalize_email(email)
-        user = self.model(email=email, role=role, password=password, **extra_fields)
+        user = self.model(email=email, role=role, **extra_fields)
         user.set_password(password)
         user.save()
         return user

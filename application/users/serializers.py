@@ -18,7 +18,4 @@ class RegisterSerializer(ModelSerializer):
     
     def create(self, validated_data):
         validated_data.pop("password2")
-        return super().create(validated_data)
-    
-
-
+        return User.objects.create_user(**validated_data)
